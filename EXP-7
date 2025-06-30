@@ -1,0 +1,80 @@
+
+
+import pandas as pd
+# Assume 'order_data' is your Pandas DataFrame
+# Example creation of a dummy order_data DataFrame for demonstration
+data = {
+    'customer ID': [101, 102, 101, 103, 102, 101],
+    'order date': ['2023-01-15', '2023-01-16', '2023-01-17', '2023-01-17', '2023-01-18', '2023-01-19'],
+    'product name': ['Laptop', 'Mouse', 'Keyboard', 'Monitor', 'Laptop', 'Mouse'],
+    'order quantity': [1, 2, 1, 1, 1, 3],
+    'price_per_unit': [1200, 25, 75, 300, 1200, 25], # Adding price per unit
+    'shipping_cost': [10, 5, 7, 15, 10, 5] # Adding shipping cost
+}
+order_data = pd.DataFrame(data)
+order_data['order date'] = pd.to_datetime(order_data['order date']) # Convert to datetime
+
+# Total number of orders
+total_orders = len(order_data)
+print(f"Total number of orders: {total_orders}")
+
+# Number of unique customers
+unique_customers = order_data['customer ID'].nunique()
+print(f"Number of unique customers: {unique_customers}")
+
+# Products ordered by a specific customer (e.g., customer ID 101)
+customer_id_to_find = 101
+products_by_customer = order_data[order_data['customer ID'] == customer_id_to_find]['product name'].unique()
+print(f"Products ordered by customer {customer_id_to_find}: {products_by_customer}")
+
+# Total quantity of a specific product ordered (e.g., 'Laptop')
+product_name_to_find = 'Laptop'
+total_quantity_of_product = order_data[order_data['product name'] == product_name_to_find]['order quantity'].sum()
+print(f"Total quantity of '{product_name_to_find}' ordered: {total_quantity_of_product}")
+
+# Orders placed on a specific date (e.g., '2023-01-17')
+date_to_find = '2023-01-17'
+orders_on_date = order_data[order_data['order date'] == date_to_find]
+print(f"\nOrders placed on {date_to_find}:\n{orders_on_date}")
+
+# Customers who ordered a specific product (e.g., 'Mouse')
+product_to_find_customers = 'Mouse'
+customers_for_product = order_data[order_data['product name'] == product_to_find_customers]['customer ID'].unique()
+print(f"Customers who ordered '{product_to_find_customers}': {customers_for_product}")
+
+# The product with the highest total quantity ordered
+product_quantities = order_data.groupby('product name')['order quantity'].sum()
+product_with_highest_quantity = product_quantities.idxmax()
+highest_quantity = product_quantities.max()
+print(f"Product with the highest total quantity ordered: '{product_with_highest_quantity}' with a total of {highest_quantity}")
+
+# The customer with the most orders
+customer_order_counts = order_data['customer ID'].value_counts()
+customer_with_most_orders = customer_order_counts.idxmax()
+most_orders_count = customer_order_counts.max()
+print(f"Customer with the most orders: {customer_with_most_orders} with {most_orders_count} orders")
+
+# Average order quantity
+average_order_quantity = order_data['order quantity'].mean()
+print(f"Average order quantity: {average_order_quantity:.2f}")
+
+# Total sales value (assuming you have a price per unit column)
+# Adding a 'total_price' column for easier calculation
+order_data['total_price'] = order_data['order quantity'] * order_data['price_per_unit']
+total_sales_value = order_data['total_price'].sum()
+print(f"Total sales value: ${total_sales_value:.2f}")
+
+# Orders with a quantity greater than a specific value (e.g., greater than 1)
+quantity_threshold = 1
+orders_greater_than_threshold = order_data[order_data['order quantity'] > quantity_threshold]
+print(f"\nOrders with quantity greater than {quantity_threshold}:\n{orders_greater_than_threshold}")
+
+# Most frequent product ordered
+most_frequent_product = order_data['product name'].mode()[0] # mode() can return multiple if there's a tie, [0] gets the first
+print(f"Most frequent product ordered: '{most_frequent_product}'")
+
+# Earliest and latest order dates
+earliest_order_date = order_data['order date'].min()
+latest_order_date = order_data['order date'].max()
+print(f"Earliest order date: {earliest_order_date.date()}")
+print(f"Latest order date: {latest_order_date.date()}")
