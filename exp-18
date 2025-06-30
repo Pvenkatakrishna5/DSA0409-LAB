@@ -1,0 +1,68 @@
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy.stats as stats
+
+# Hospital data for age and %fat
+hospital_data = {'Age': [23, 23, 23, 24, 24, 24, 25, 25, 25, 26, 26, 26, 27, 27, 28, 28, 29, 30],
+                 'Fat': [9.5, 26.5, 7.8, 17.8, 31.4, 25.9, 27.5, 27.2, 31.2, 34.6, 42.5, 28.8, 33.4, 30.2, 34.1, 32.9, 41.2, 35.7]}
+df_hospital = pd.DataFrame(hospital_data)
+
+# Calculate mean, median, and standard deviation using Pandas
+age_mean = df_hospital['Age'].mean()
+age_median = df_hospital['Age'].median()
+age_std = df_hospital['Age'].std()
+
+fat_mean = df_hospital['Fat'].mean()
+fat_median = df_hospital['Fat'].median()
+fat_std = df_hospital['Fat'].std()
+
+print("Age Statistics:")
+print(f"Mean: {age_mean:.2f}")
+print(f"Median: {age_median:.2f}")
+print(f"Standard Deviation: {age_std:.2f}")
+print("\n%Fat Statistics:")
+print(f"Mean: {fat_mean:.2f}")
+print(f"Median: {fat_median:.2f}")
+print(f"Standard Deviation: {fat_std:.2f}")
+
+# Draw boxplots for age and %fat
+plt.figure(figsize=(12, 6))
+
+plt.subplot(1, 2, 1)
+df_hospital.boxplot(column='Age')
+plt.title('Boxplot of Age')
+plt.ylabel('Age (years)')
+
+plt.subplot(1, 2, 2)
+df_hospital.boxplot(column='Fat')
+plt.title('Boxplot of %Fat')
+plt.ylabel('% Fat')
+
+plt.tight_layout()
+plt.show()
+
+# Draw a scatter plot based on age and %fat
+plt.figure(figsize=(8, 6))
+plt.scatter(df_hospital['Age'], df_hospital['Fat'])
+plt.xlabel('Age (years)')
+plt.ylabel('% Fat')
+plt.title('Scatter Plot of Age vs %Fat')
+plt.grid(True)
+plt.show()
+
+# Draw a q-q plot based on age and %fat
+plt.figure(figsize=(12, 6))
+
+plt.subplot(1, 2, 1)
+stats.probplot(df_hospital['Age'], dist="norm", plot=plt)
+plt.title('Q-Q Plot of Age')
+
+plt.subplot(1, 2, 2)
+stats.probplot(df_hospital['Fat'], dist="norm", plot=plt)
+plt.title('Q-Q Plot of %Fat')
+
+plt.tight_layout()
+plt.show()
