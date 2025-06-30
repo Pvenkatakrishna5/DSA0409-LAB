@@ -1,0 +1,29 @@
+
+
+import matplotlib.pyplot as plt
+# Sample data (replace with your actual data)
+post_likes = [10, 25, 50, 10, 75, 25, 100, 50, 25, 10, 10, 75, 50, 25, 100]
+
+# Calculate the frequency distribution of likes
+likes_frequency = Counter(post_likes)
+
+# Sort the distribution by number of likes
+sorted_likes_frequency = dict(sorted(likes_frequency.items()))
+
+# Print the frequency distribution
+print("Frequency Distribution of Likes:")
+for likes, frequency in sorted_likes_frequency.items():
+    print(f"Number of Likes: {likes}, Frequency: {frequency}")
+
+# Optional: Visualize the frequency distribution using a bar chart
+likes = sorted_likes_frequency.keys()
+frequency = sorted_likes_frequency.values()
+
+plt.figure(figsize=(10, 6))
+plt.bar(likes, frequency, color='lightcoral')
+plt.xlabel('Number of Likes')
+plt.ylabel('Frequency')
+plt.title('Frequency Distribution of Likes')
+plt.xticks(list(likes))
+plt.grid(axis='y')
+plt.show()
