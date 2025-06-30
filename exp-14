@@ -1,0 +1,23 @@
+
+
+from collections import Counter
+import re
+
+# Create a dummy text file for demonstration
+with open('sample_text.txt', 'w') as f:
+  f.write("This is a sample text file.\nIt contains some words for analysis.\nWords like sample, text, analysis are repeated.")
+
+# Read the text document
+with open('sample_text.txt', 'r') as f:
+    text = f.read()
+
+# Process the text: convert to lowercase and remove punctuation
+# Using regular expression to find only word characters
+words = re.findall(r'\b\w+\b', text.lower())
+
+# Calculate word frequency distribution
+word_counts = Counter(words)
+
+# Print the word frequency distribution
+for word, count in word_counts.most_common():
+    print(f"{word}: {count}")
