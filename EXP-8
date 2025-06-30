@@ -1,0 +1,8 @@
+
+product_sales = order_data.groupby('product name')['order quantity'].sum()
+
+# Sort the products by total quantity in descending order and get the top 5
+top_5_products = product_sales.sort_values(ascending=False).head(5)
+
+print("\nTop 5 products by quantity sold in the past month:")
+top_5_products
