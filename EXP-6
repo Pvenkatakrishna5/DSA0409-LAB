@@ -1,0 +1,28 @@
+
+item_prices = [2.50, 1.00, 3.25, 4.00]
+item_quantities = [2, 5, 1, 3]
+
+# Discount and tax rates (as percentages)
+discount_rate = 10  # 10% discount
+tax_rate = 7      # 7% tax
+
+# Calculate the subtotal
+subtotal = sum([price * quantity for price, quantity in zip(item_prices, item_quantities)])
+
+# Calculate the discount amount
+discount_amount = (discount_rate / 100) * subtotal
+
+# Calculate the total after discount
+total_after_discount = subtotal - discount_amount
+
+# Calculate the tax amount
+tax_amount = (tax_rate / 100) * total_after_discount
+
+# Calculate the final total cost
+total_cost = total_after_discount + tax_amount
+
+print(f"Subtotal: ${subtotal:.2f}")
+print(f"Discount ({discount_rate}%): -${discount_amount:.2f}")
+print(f"Total after discount: ${total_after_discount:.2f}")
+print(f"Tax ({tax_rate}%): +${tax_amount:.2f}")
+print(f"Final Total Cost: ${total_cost:.2f}")
