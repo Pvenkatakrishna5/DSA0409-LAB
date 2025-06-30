@@ -1,0 +1,22 @@
+
+import numpy as np
+
+house_data = np.array([
+    [3, 1500, 250000, 0.05, 5000],
+    [5, 2200, 400000, 0.10, 8000],
+    [4, 1800, 300000, 0.02, 6000],
+    [6, 2500, 550000, 0.15, 10000],
+    [3, 1600, 270000, 0.03, 5500],
+    [5, 2100, 380000, 0.08, 7500]
+])
+
+# Filter houses with more than four bedrooms (assuming bedrooms is the first column, index 0)
+houses_with_more_than_four_bedrooms = house_data[house_data[:, 0] > 4]
+
+# Check if there are any houses that meet the criteria
+if houses_with_more_than_four_bedrooms.shape[0] > 0:
+    # Calculate the average sale price (assuming sale_price is the third column, index 2)
+    average_sale_price = np.mean(houses_with_more_than_four_bedrooms[:, 2])
+    print("Average sale price of houses with more than four bedrooms:", average_sale_price)
+else:
+    print("No houses found with more than four bedrooms.")
