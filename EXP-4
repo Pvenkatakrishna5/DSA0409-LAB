@@ -1,0 +1,20 @@
+
+import numpy as np
+# Filter houses with more than four bedrooms (assuming bedrooms is the first column, index 0)
+houses_with_more_than_four_bedrooms = house_data[house_data[:, 0] > 4]
+
+# Check if there are any houses that meet the criteria
+if houses_with_more_than_four_bedrooms.shape[0] > 0:
+    # Calculate the average sale price (assuming sale_price is the third column, index 2)
+    average_sale_price = np.mean(houses_with_more_than_four_bedrooms[:, 2])
+    print("Average sale price of houses with more than four bedrooms:", average_sale_price)
+
+    # Calculate the average discount for these houses (assuming discount is the fourth column, index 3)
+    average_discount = np.mean(houses_with_more_than_four_bedrooms[:, 3])
+    print("Average discount for houses with more than four bedrooms:", average_discount)
+
+    # Calculate the average tax for these houses (assuming tax is the fifth column, index 4)
+    average_tax = np.mean(houses_with_more_than_four_bedrooms[:, 4])
+    print("Average tax for houses with more than four bedrooms:", average_tax)
+else:
+    print("No houses found with more than four bedrooms.")
